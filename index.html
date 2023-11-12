@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Force Layout</title>
+  <h1 style="text-align:center;">Force Layout</h1>
+  <h2 style="text-align:center;">By: TANAY SAYALA</h1>
+  <h3 style="text-align:center;">Node size determined by degree (Radio Buttons do not work)</h3>
+  <h4 style="text-align:center;">Click on nodes to see Titles and Countries</h4>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <script src="network.js"></script>
+  <style>
+    #simulation-controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 100%;
+        margin: 0 20vw; 
+    }
+</style>
+  <form id="simulation-controls">
+    <label>
+        Link Strengths:
+        <input type="range" id="link-strength" min="0" max="1" step="0.01" value="0.5">
+    </label>
+    <label>
+        Collide:
+        <input type="range" id="collide" min="-10" max="10" step="0.1" value="1">
+    </label>
+    <label>
+        Charge:
+        <input type="range" id="charge" min="-100" max="0" step="1" value="-30">
+    </label>
+    <button id="reset-button">Reset</button>
+    <label>
+        Node Size:
+        <input type="radio" name="node-size" value="publications"> Number of Publications
+        <input type="radio" name="node-size" value="degree"> Degree
+        <input type="radio" name="node-size" value="citations"> Number of Citations
+    </label>
+</form>
+</head>
+<body>
+  <script>
+    d3.json("publication_network.json").then((data)=>{
+      let svg = d3.select('body').append("svg").attr("viewBox","0 0 1000 800")
+      console.log(data)
+      simulate(data,svg) // main function to make network
+    })
+
+
+  </script>
+  
+</body>
+</html>
